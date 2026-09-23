@@ -1,6 +1,5 @@
 import React from 'react';
 import { SectionId } from '../types';
-import { MatTekLogo } from './MatTekLogo';
 import { COMPANY_INFO, STORES } from '../data/stores';
 import { 
   MapPin, 
@@ -9,6 +8,8 @@ import {
   Instagram, 
   MessageCircle
 } from 'lucide-react';
+
+import logoWhite from '@/src/assets/images/logo-white.webp';
 
 interface FooterProps {
   onNavigateSection: (section: SectionId) => void;
@@ -24,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
           
           {/* Brand Info */}
           <div className="lg:col-span-4 space-y-4">
-            <MatTekLogo theme="dark" size="md" />
+            <img src={logoWhite} alt="Logo Mak Tek" width={200}/>
             <p className="text-slate-400 leading-relaxed text-xs">
               Venda, manutenção e assistência técnica autorizada em motores, geradores, máquinas e ferramentas. Atendendo Canguçu, Pelotas e toda a região sul desde 2017.
             </p>

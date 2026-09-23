@@ -50,7 +50,7 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-[#E31B23] text-xs font-bold uppercase tracking-wider mb-2">
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Garantia de Fábrica · 12 Fabricantes Oficiais</span>
+              <span>Assistência técnica autorizada</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
               {title}
@@ -83,27 +83,21 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
         onTouchEnd={() => setIsPaused(false)}
       >
         {/* Soft edge gradient fades for desktop */}
-        <div className="hidden md:block absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#12151A] to-transparent z-10 pointer-events-none" />
-        <div className="hidden md:block absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#12151A] to-transparent z-10 pointer-events-none" />
+        <div className="hidden md:block absolute left-0 top-0 bottom-0 w-24 bg-linear-to-r from-[#12151A] to-transparent z-10 pointer-events-none" />
+        <div className="hidden md:block absolute right-0 top-0 bottom-0 w-24 bg-linear-to-l from-[#12151A] to-transparent z-10 pointer-events-none" />
 
         {/* Continuous moving track with pure logos */}
         <div 
           className={`animate-marquee-infinite flex items-center gap-4 sm:gap-5 px-4 ${isPaused ? 'paused' : ''}`}
         >
           {marqueeItems.map((brand, index) => {
-            const isHighlighted = brand.id === 'husqvarna' || brand.id === 'branco' || brand.id === 'toyama';
             return (
               <div
                 key={`${brand.id}-${index}`}
                 onClick={() => handleBrandClick(brand)}
-                className={`group relative w-44 sm:w-56 h-20 sm:h-22 shrink-0 bg-[#1A1F26] hover:bg-[#222933] border rounded-xl p-3 flex items-center justify-center transition-all duration-200 hover:shadow-lg select-none cursor-pointer ${
-                  isHighlighted
-                    ? 'border-red-500/30 hover:border-red-500/60'
-                    : 'border-neutral-800 hover:border-neutral-700'
-                }`}
+                className={`group relative w-44 sm:w-56 h-20 sm:h-22 shrink-0 bg-[#1A1F26] hover:bg-[#222933] border rounded-xl p-3 flex items-center justify-center transition-all duration-200 hover:shadow-lg select-none cursor-pointer border-red-500/30 hover:border-red-500/60`}
                 title={brand.name}
               >
-                {/* Dedicated Pure Brand Logo */}
                 <BrandLogo brand={brand} size="md" />
               </div>
             );

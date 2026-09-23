@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { MatTekLogo } from './MatTekLogo';
 import { SectionId } from '../types';
 import { 
   MessageCircle, 
@@ -8,6 +7,9 @@ import {
   MapPin,
   Clock
 } from 'lucide-react';
+
+import logo from '@/src/assets/images/logo.webp';
+
 import { COMPANY_INFO, isStoreOpenNow } from '../data/stores';
 
 interface TopNavbarProps {
@@ -78,7 +80,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
             className="flex items-center text-left focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#E31B23] rounded-md transition-opacity hover:opacity-90"
             aria-label="Mat-Tek Página Inicial"
           >
-            <MatTekLogo size="md" showSubtitle={true} />
+            <img src={logo} alt="Logo Mak Tek" width={200}/>
           </button>
 
           {/* Section Navigation Links */}
