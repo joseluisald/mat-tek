@@ -1,45 +1,23 @@
 import React from 'react';
-import { PageId } from '../types';
+import { SectionId } from '../types';
 import { MatTekLogo } from './MatTekLogo';
 import { COMPANY_INFO, STORES } from '../data/stores';
-import { AUTHORIZED_BRANDS } from '../data/brands';
 import { 
   MapPin, 
   Phone, 
   Clock, 
   Instagram, 
-  MessageCircle, 
-  ShieldCheck, 
-  Heart,
-  ChevronRight
+  MessageCircle
 } from 'lucide-react';
 
 interface FooterProps {
-  onNavigate: (page: PageId) => void;
-  onOpenQuote: () => void;
+  onNavigateSection: (section: SectionId) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuote }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
   return (
     <footer className="bg-[#14171A] text-slate-400 text-xs border-t border-neutral-800">
       
-      {/* Brands strip */}
-      <div className="border-b border-neutral-800/80 py-6 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-slate-300 font-semibold">
-            <ShieldCheck className="w-4 h-4 text-[#E31B23]" />
-            <span>Assistência Técnica Autorizada Oficial:</span>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-slate-300 font-medium">
-            {AUTHORIZED_BRANDS.map((b) => (
-              <span key={b.id} className="hover:text-white transition-colors">
-                {b.name}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
@@ -48,15 +26,26 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuote }) => {
           <div className="lg:col-span-4 space-y-4">
             <MatTekLogo theme="dark" size="md" />
             <p className="text-slate-400 leading-relaxed text-xs">
-              Venda, manutenção e assistência técnica autorizada em máquinas florestais, motores estacionários, ferramentas elétricas e geradores. Atendendo Canguçu, Pelotas e toda a região sul desde 2017.
+              Venda, manutenção e assistência técnica autorizada em motores, geradores, máquinas e ferramentas. Atendendo Canguçu, Pelotas e toda a região sul desde 2017.
             </p>
             <div className="flex items-center gap-3 pt-1">
               <a
                 href={COMPANY_INFO.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="Instagram Mat-Tek"
+                className="w-9 h-9 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                aria-label="Instagram Pelotas"
+                title="Instagram Pelotas"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.instagram.com/mattekcangucu/"
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                aria-label="Instagram Canguçu"
+                title="Instagram Canguçu"
               >
                 <Instagram className="w-4 h-4" />
               </a>
@@ -64,8 +53,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuote }) => {
                 href={`https://wa.me/${COMPANY_INFO.centralWhatsappRaw}`}
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-emerald-800/60 text-slate-300 hover:text-emerald-400 flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-xl bg-neutral-800 hover:bg-emerald-800/60 text-slate-300 hover:text-emerald-400 flex items-center justify-center transition-colors"
                 aria-label="WhatsApp Mat-Tek"
+                title="WhatsApp Oficial"
               >
                 <MessageCircle className="w-4 h-4" />
               </a>
@@ -78,50 +68,42 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuote }) => {
             <ul className="space-y-2">
               <li>
                 <button
-                  onClick={() => onNavigate('home')}
+                  onClick={() => onNavigateSection('inicio')}
                   className="hover:text-white transition-colors"
                 >
-                  Página Inicial
+                  Início
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('products')}
+                  onClick={() => onNavigateSection('parceiros')}
                   className="hover:text-white transition-colors"
                 >
-                  Catálogo de Máquinas
+                  Marcas Parceiras
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('services')}
+                  onClick={() => onNavigateSection('historia')}
                   className="hover:text-white transition-colors"
                 >
-                  Assistência Técnica
+                  Nossa História
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('about')}
+                  onClick={() => onNavigateSection('unidades')}
                   className="hover:text-white transition-colors"
                 >
-                  Nossa História (2017)
+                  Lojas & Horários
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('stores')}
+                  onClick={() => onNavigateSection('contato')}
                   className="hover:text-white transition-colors"
                 >
-                  Pelotas & Canguçu
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={onOpenQuote}
-                  className="text-[#E31B23] font-bold hover:underline"
-                >
-                  Montar Orçamento
+                  Fale Conosco
                 </button>
               </li>
             </ul>
@@ -133,7 +115,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuote }) => {
             <div className="space-y-2 leading-relaxed">
               <p className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-[#E31B23] shrink-0 mt-0.5" />
-                <span>R. Gen. Argolo, 1322 - Centro, Pelotas - RS, 96020-380</span>
+                <span>R. Gen. Argolo, 1322 - Centro, Pelotas - RS</span>
               </p>
               <p className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-[#E31B23] shrink-0" />
@@ -141,9 +123,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuote }) => {
                   (53) 3228-5826
                 </a>
               </p>
+              <p className="flex items-center gap-2">
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <a href="https://wa.me/5553984489179" target="_blank" rel="noreferrer" className="text-emerald-400 font-mono hover:underline">
+                  (53) 98448-9179
+                </a>
+              </p>
               <p className="flex items-start gap-2 text-[11px] text-slate-500">
                 <Clock className="w-3.5 h-3.5 text-slate-500 shrink-0 mt-0.5" />
-                <span>Seg a Sex: 08:30–12:00, 13:30–18:00</span>
+                <span>Seg a Sex: 08:30–12:00, 13:30–18:00 (Sáb/Dom fechado)</span>
               </p>
             </div>
           </div>
@@ -154,7 +142,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuote }) => {
             <div className="space-y-2 leading-relaxed">
               <p className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-[#E31B23] shrink-0 mt-0.5" />
-                <span>R. Gen. Câmara, 1556 - Centro, Canguçu - RS, 96600-000</span>
+                <span>R. Gen. Câmara, 1556 - Centro, Canguçu - RS</span>
               </p>
               <p className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-[#E31B23] shrink-0" />
@@ -165,12 +153,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuote }) => {
               <p className="flex items-center gap-2">
                 <MessageCircle className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                 <a href="https://wa.me/5553984489179" target="_blank" rel="noreferrer" className="text-emerald-400 font-mono hover:underline">
-                  Whats: (53) 98448-9179
+                  (53) 98448-9179
                 </a>
               </p>
               <p className="flex items-start gap-2 text-[11px] text-slate-500">
                 <Clock className="w-3.5 h-3.5 text-slate-500 shrink-0 mt-0.5" />
-                <span>Seg a Sex: 08:30–12:00, 13:30–18:00</span>
+                <span>Seg a Sex: 08:30–12:00, 13:30–18:00 (Sáb/Dom fechado)</span>
               </p>
             </div>
           </div>
@@ -179,7 +167,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuote }) => {
 
         {/* Bottom bar */}
         <div className="border-t border-neutral-800/80 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-          <p>© {new Date().getFullYear()} Mat-Tek Máquinas, Motores e Ferramentas. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} Mat-Tek Máquinas, Motores e Assistência Técnica. Todos os direitos reservados.</p>
           <p className="flex items-center gap-1">
             <span>Construindo nossa história com trabalho, honestidade e dedicação desde 2017.</span>
           </p>

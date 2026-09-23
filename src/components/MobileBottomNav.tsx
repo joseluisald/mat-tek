@@ -1,37 +1,29 @@
 import React from 'react';
-import { PageId } from '../types';
+import { SectionId } from '../types';
 import { 
   Home, 
-  ShoppingBag, 
-  Wrench, 
+  ShieldCheck, 
+  BookOpen, 
   MapPin, 
-  FileText 
+  MessageCircle 
 } from 'lucide-react';
+import { COMPANY_INFO } from '../data/stores';
 
 interface MobileBottomNavProps {
-  currentPage: PageId;
-  onNavigate: (page: PageId) => void;
-  quoteCount: number;
-  onOpenQuote: () => void;
+  activeSection: SectionId;
+  onNavigateSection: (section: SectionId) => void;
 }
 
 export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
-  currentPage,
-  onNavigate,
-  quoteCount,
-  onOpenQuote,
+  activeSection,
+  onNavigateSection,
 }) => {
-  const tabs: { id: PageId; label: string; icon: React.FC<{ className?: string }> }[] = [
-    { id: 'home', label: 'Início', icon: Home },
-    { id: 'products', label: 'Produtos', icon: ShoppingBag },
-    { id: 'services', label: 'Oficina', icon: Wrench },
-    { id: 'stores', label: 'Lojas', icon: MapPin },
+  const tabs: { id: SectionId; label: string; icon: React.FC<{ className?: string }> }[] = [
+    { id: 'inicio', label: 'Início', icon: Home },
+    { id: 'parceiros', label: 'Parceiros', icon: ShieldCheck },
+    { id: 'historia', label: 'História', icon: BookOpen },
+    { id: 'unidades', label: 'Lojas', icon: MapPin },
   ];
-
-  const handleTabClick = (page: PageId) => {
-    onNavigate(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <nav 
@@ -40,13 +32,13 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
     >
       <div className="grid grid-cols-5 items-center justify-items-center max-w-md mx-auto">
         {tabs.map((tab) => {
-          const isActive = currentPage === tab.id;
+          const isActive = activeSection === tab.id;
           const Icon = tab.icon;
 
           return (
             <button
               key={tab.id}
-              onClick={() => handleTabClick(tab.id)}
+              onClick={() => onNavigateSection(tab.id)}
               className={`flex flex-col items-center justify-center w-full min-h-[48px] py-1 rounded-lg transition-all active:scale-95 ${
                 isActive ? 'text-[#E31B23]' : 'text-slate-500 hover:text-slate-800'
               }`}
@@ -64,25 +56,20 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           );
         })}
 
-        {/* Orçamento Tab with badge */}
-        <button
-          onClick={onOpenQuote}
-          className={`flex flex-col items-center justify-center w-full min-h-[48px] py-1 rounded-lg transition-all active:scale-95 ${
-            quoteCount > 0 ? 'text-[#E31B23]' : 'text-slate-500 hover:text-slate-800'
-          }`}
+        {/* WhatsApp Direct Tab */}
+        <a
+          href={`https://wa.me/${COMPANY_INFO.centralWhatsappRaw}?text=${encodeURIComponent('Olá Mat-Tek! Vim pelo site e gostaria de atendimento.')}`}
+          target="_blank"
+          rel="noreferrer"
+          className="flex flex-col items-center justify-center w-full min-h-[48px] py-1 rounded-lg transition-all active:scale-95 text-emerald-600 hover:text-emerald-700"
         >
           <div className="relative">
-            <FileText className={`w-5 h-5 ${quoteCount > 0 ? 'scale-110 text-[#E31B23]' : ''}`} />
-            {quoteCount > 0 && (
-              <span className="absolute -top-1.5 -right-2.5 min-w-[18px] h-[18px] px-1 bg-[#E31B23] text-white text-[10px] font-black rounded-full flex items-center justify-center shadow-xs animate-pulse">
-                {quoteCount}
-              </span>
-            )}
+            <MessageCircle className="w-5 h-5 scale-105" />
           </div>
-          <span className={`text-[10px] tracking-tight mt-1 font-bold ${quoteCount > 0 ? 'text-[#E31B23]' : 'text-slate-600'}`}>
-            Cotação
+          <span className="text-[10px] tracking-tight mt-1 font-bold text-emerald-700">
+            WhatsApp
           </span>
-        </button>
+        </a>
       </div>
     </nav>
   );
