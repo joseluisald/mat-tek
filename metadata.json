@@ -1,0 +1,6 @@
+{
+  "name": "Mat-Tek Máquinas e Assistência Técnica",
+  "description": "Site oficial da Mat-Tek em Pelotas e Canguçu. Venda de máquinas, motores, ferramentas, geradores e assistência técnica autorizada das melhores marcas com sistema de orçamento integrado.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
