@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { AUTHORIZED_BRANDS } from '../data/brands';
 import { Brand } from '../types';
 import { BrandLogo } from './BrandLogo';
 import { 
   ShieldCheck, 
   ChevronRight, 
+  ChevronLeft,
   Pause, 
   Play
 } from 'lucide-react';
@@ -23,6 +24,8 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
   subtitle = "Garantia de fábrica e peças genuínas para os maiores fabricantes"
 }) => {
   const [isPaused, setIsPaused] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
 
   const handleBrandClick = (brand: Brand) => {
     if (onSelectBrand) {
@@ -32,11 +35,23 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
     }
   };
 
+  const handleScrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -260, behavior: 'smooth' });
+    }
+  };
+
+  const handleScrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 260, behavior: 'smooth' });
+    }
+  };
+
   // Duplicate the brands array to create the infinite continuous loop effect
   const marqueeItems = [...AUTHORIZED_BRANDS, ...AUTHORIZED_BRANDS];
 
   return (
-    <div className="relative w-full py-8 md:py-10 bg-[#12151A] text-white overflow-hidden border-y border-neutral-800 select-none">
+    <div className="relative w-full py-8 md:py-10 bg-[#12151A] text-white overflow-hidden border-y border-neutral-800">
       {/* Background visual texture */}
       <div 
         className="absolute inset-0 opacity-5 pointer-events-none"
@@ -63,6 +78,26 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
           </div>
 
           <div className="flex items-center gap-2 self-start md:self-auto">
+            {/* Scroll Navigation Left / Right */}
+            <div className="flex items-center gap-1 bg-white/5 border border-white/10 rounded-lg p-0.5">
+              <button
+                onClick={handleScrollLeft}
+                className="p-2 text-slate-300 hover:text-white hover:bg-white/10 rounded-md transition-colors active:scale-95"
+                aria-label="Rolar marcas para a esquerda"
+                title="Rolar para esquerda"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleScrollRight}
+                className="p-2 text-slate-300 hover:text-white hover:bg-white/10 rounded-md transition-colors active:scale-95"
+                aria-label="Rolar marcas para a direita"
+                title="Rolar para direita"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+
             {/* Carousel Pause/Resume control */}
             <button
               onClick={() => setIsPaused(!isPaused)}
@@ -72,12 +107,12 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
               {isPaused ? (
                 <>
                   <Play className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Retomar</span>
+                  <span className="hidden sm:inline">Retomar</span>
                 </>
               ) : (
                 <>
                   <Pause className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Pausar</span>
+                  <span className="hidden sm:inline">Pausar</span>
                 </>
               )}
             </button>
@@ -85,9 +120,9 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
             {onNavigateToServices && (
               <button
                 onClick={() => onNavigateToServices()}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-[#E31B23] hover:text-red-400 bg-red-500/10 hover:bg-red-500/20 px-3.5 py-2 rounded-lg border border-red-500/30 transition-colors active:scale-95"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-[#E31B23] hover:text-red-400 bg-red-500/10 hover:bg-red-500/20 px-3 py-2 rounded-lg border border-red-500/30 transition-colors active:scale-95"
               >
-                <span>Ver Serviços</span>
+                <span>Serviços</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
             )}
@@ -95,20 +130,22 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
         </div>
       </div>
 
-      {/* Horizontal Continuous Infinite Marquee Container - 100% NO SCROLLBAR */}
+      {/* Horizontal Continuous Infinite Marquee Container with Layout Scroll */}
       <div 
-        className="relative w-full overflow-hidden py-2"
+        ref={scrollContainerRef}
+        className="relative w-full overflow-x-auto layout-scroll py-2 scroll-smooth"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={() => setIsPaused(true)}
         onTouchEnd={() => setIsPaused(false)}
       >
         {/* Soft edge gradient fades for desktop */}
-        <div className="hidden md:block absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#12151A] to-transparent z-10 pointer-events-none" />
-        <div className="hidden md:block absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#12151A] to-transparent z-10 pointer-events-none" />
+        <div className="hidden md:block absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#12151A] to-transparent z-10 pointer-events-none" />
+        <div className="hidden md:block absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#12151A] to-transparent z-10 pointer-events-none" />
 
         {/* Continuous moving track with pure logos */}
         <div 
+          ref={marqueeRef}
           className={`animate-marquee-infinite flex items-center gap-4 sm:gap-5 px-4 ${isPaused ? 'paused' : ''}`}
         >
           {marqueeItems.map((brand, index) => {

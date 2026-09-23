@@ -11,10 +11,10 @@ body {
   min-height: 100vh;
 }
 
-/* Custom page layout vertical scrollbar only */
+/* Custom page layout scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 0px;
+  width: 10px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -55,11 +55,33 @@ body {
   animation-play-state: paused;
 }
 
+/* Horizontal scroll styling for carousels in layout */
+.layout-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(227, 27, 35, 0.4) rgba(255, 255, 255, 0.05);
+}
+
+.layout-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.layout-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+}
+
+.layout-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+}
+
+.layout-scroll::-webkit-scrollbar-thumb:hover {
+  background: #E31B23;
+}
+
 /* Touch and scroll helpers */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
-  height: 0;
-  width: 0;
 }
 .no-scrollbar {
   -ms-overflow-style: none;

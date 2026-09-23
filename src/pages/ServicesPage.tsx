@@ -6,9 +6,16 @@ import { BrandCarousel } from '../components/BrandCarousel';
 import { 
   Wrench, 
   ShieldCheck, 
+  CheckCircle2, 
+  Settings, 
+  Clock, 
+  Sparkles, 
   ArrowRight,
+  ChevronRight,
+  Phone,
   MessageCircle,
-  Phone
+  HelpCircle,
+  Filter
 } from 'lucide-react';
 
 interface ServicesPageProps {
@@ -26,190 +33,244 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
 
   const maintenanceServices = [
     {
-      code: '01',
-      title: 'Revisão Preventiva & Regulagem',
-      description: 'Limpeza de carburadores por ultrassom, descarbonização, teste de compressão e regulagem de marcha-lenta e mistura estequiométrica.',
+      title: 'Revisão Preventiva e Regulagem',
+      icon: '⚙️',
+      description: 'Limpeza de carburadores por ultrassom, descarbonização, troca de velas, regulagem de marcha-lenta e testes de compressão.',
       appliedTo: 'Motosserras, Roçadeiras e Motores 2T/4T',
     },
     {
-      code: '02',
-      title: 'Retífica de Motores Estacionários',
-      description: 'Retífica de bloco, assentamento de válvulas, substituição de pistões, anéis, bielas e juntas de fábrica.',
+      title: 'Conserto de Motores Estacionários',
+      icon: '🔩',
+      description: 'Retífica, substituição de pistões, anéis, bielas, válvulas, juntas originais e regulagem de governador mecânico.',
       appliedTo: 'Branco, Toyama, Kawashima, Vulcan',
     },
     {
-      code: '03',
-      title: 'Geradores de Energia & Placas AVR',
-      description: 'Diagnóstico de placas reguladoras automáticas de tensão (AVR), escovas, enrolamento de estator/rotor e ensaio com carga resistiva.',
-      appliedTo: 'Grupos Geradores Gasolina e Diesel (1 a 15 kVA)',
+      title: 'Manutenção de Geradores de Energia',
+      icon: '⚡',
+      description: 'Diagnóstico de placa reguladora AVR, bobinagem, escovas de carvão, disjuntores e teste sob carga real.',
+      appliedTo: 'Geradores Gasolina e Diesel (1 a 15 kVA)',
     },
     {
-      code: '04',
-      title: 'Lavadoras Industriais de Alta Pressão',
-      description: 'Substituição de gaxetas de vedação, pistões de cerâmica maciça, válvulas de aço inox e reguladores de pressão by-pass.',
+      title: 'Lavadoras de Alta Pressão Industriais',
+      icon: '💧',
+      description: 'Troca de gaxetas de vedação de água e óleo, válvulas de sucção/pressão, pistões de cerâmica e cabeçote de latão.',
       appliedTo: 'Especialista Autorizado JactoClean',
     },
     {
-      code: '05',
-      title: 'Conjuntos de Corte & Afiação Técnica',
-      description: 'Afiação com gabarito de passo e profundidade para correntes Oregon e Husqvarna, retífica de calhas de sabre e alinhamento.',
+      title: 'Afiação e Montagem de Conjuntos de Corte',
+      icon: '🪓',
+      description: 'Afiação técnica com gabarito de profundidade para correntes Oregon e Husqvarna, retífica de calhas de sabre e rebite.',
       appliedTo: 'Sabres e Correntes de todos os calibres',
     },
     {
-      code: '06',
-      title: 'Processamento de Garantia de Fábrica',
-      description: 'Abertura de laudo técnico oficial credenciado, solicitação e aplicação direta de peças em garantia junto às 12 montadoras parceiras.',
-      appliedTo: '12 Fabricantes Oficiais',
+      title: 'Garantia de Fábrica Oficial',
+      icon: '🛡️',
+      description: 'Abertura de laudo técnico oficial, pedido de peças em garantia direto com as 12 montadoras sem burocracia para o cliente.',
+      appliedTo: '12 Marcas Credenciadas Oficialmente',
     },
   ];
 
   return (
-    <div className="space-y-16 sm:space-y-20 pb-20 md:pb-16 text-[#15181C]">
+    <div className="space-y-12 sm:space-y-16 pb-20 md:pb-12">
       
       {/* Page Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
-        <div className="border-b border-stone-200 pb-8 space-y-4">
-          <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#E31B23]">
-            Oficina Especializada & Assistência Credenciada
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10">
+        <div className="border-b border-slate-200 pb-8 space-y-4">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#E31B23]">
+            <Wrench className="w-4 h-4" />
+            <span>Oficina Especializada & Assistência Autorizada</span>
           </div>
-          <h1 className="font-display text-2xl sm:text-4xl font-bold text-stone-900 tracking-tight">
-            Assistência Técnica Oficial de Fábrica
+          <h1 className="text-2.5xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Assistência Técnica Oficial das 12 Maiores Marcas
           </h1>
-          <p className="text-xs sm:text-sm text-stone-600 max-w-3xl leading-relaxed">
-            Diagnóstico com instrumental técnico, peças sobressalentes 100% genuínas e profissionais certificados pelos fabricantes em Pelotas e Canguçu.
+          <p className="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
+            Nossa equipe técnica possui treinamento direto com as fábricas para realizar revisões preventivas, reparos completos de motor e acionamento de garantias em Pelotas e Canguçu.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <button
               onClick={() => onOpenQuoteWithService()}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] bg-[#E31B23] hover:bg-[#C0121A] text-white text-xs font-bold rounded-md transition-all active:scale-95 shadow-sm"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] bg-[#E31B23] hover:bg-[#C0121A] text-white text-xs font-bold rounded-lg shadow-sm active:scale-95 transition-all"
             >
-              <span>Solicitar Orçamento de Oficina</span>
+              <span>Solicitar Orçamento de Conserto / Peça</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <a
-              href={`https://wa.me/${COMPANY_INFO.centralWhatsappRaw}?text=${encodeURIComponent('Olá! Gostaria de falar com o mecânico da oficina Mat-Tek.')}`}
+              href={`https://wa.me/${COMPANY_INFO.centralWhatsappRaw}?text=${encodeURIComponent('Olá! Gostaria de falar com o responsável técnico da oficina Mat-Tek.')}`}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded-md transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold rounded-lg transition-colors"
             >
               <MessageCircle className="w-4 h-4 text-emerald-600" />
-              <span>Falar com Responsável Técnico</span>
+              <span>Falar com Técnico no WhatsApp</span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* Brand Carousel for continuous reassurance */}
-      <BrandCarousel />
+      {/* CONTINUOUS HORIZONTAL BRAND CAROUSEL WITH LOGOS */}
+      <BrandCarousel 
+        title="12 Redes Autorizadas com Peças Originais"
+        subtitle="Carrossel contínuo das marcas parceiras - toque para consultar peças e revisões"
+      />
 
-      {/* Services Grid - Architectural Editorial Cards */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-stone-200 gap-3">
+      {/* 12 AUTHORIZED BRANDS - ONLY LOGOS GRID */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
           <div>
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#E31B23]">
-              Procedimentos Certificados
+            <span className="text-xs font-bold uppercase tracking-widest text-[#E31B23]">
+              Credenciamento de Fábrica
             </span>
-            <h2 className="font-display text-2xl font-bold text-stone-900 mt-1">
-              Principais Serviços Realizados em Bancada
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">
+              12 Marcas com Atendimento Autorizado
             </h2>
           </div>
-          <p className="text-xs text-stone-500 max-w-md">
-            Atendimento para máquinas sob garantia e equipamentos fora de garantia de todas as potências.
-          </p>
+          <span className="text-xs text-slate-500">
+            Peças genuínas com nota fiscal e garantia oficial
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {maintenanceServices.map((service) => (
-            <div
-              key={service.code}
-              className="bg-white border border-stone-200 hover:border-stone-400 rounded-lg p-6 transition-all flex flex-col justify-between space-y-5"
+        {/* Brand quick filter chips */}
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 pt-1">
+          <button
+            onClick={() => setActiveBrandFilter('all')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap min-h-[38px] transition-colors ${
+              activeBrandFilter === 'all'
+                ? 'bg-[#E31B23] text-white'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            Todas as 12 Marcas
+          </button>
+          {AUTHORIZED_BRANDS.map((b) => (
+            <button
+              key={b.id}
+              onClick={() => setActiveBrandFilter(b.id)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap min-h-[38px] transition-colors ${
+                activeBrandFilter === b.id
+                  ? 'bg-[#1E2229] text-white'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
             >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between border-b border-stone-100 pb-3">
-                  <span className="font-mono text-xs font-bold text-[#E31B23]">
-                    {service.code} / SERVIÇO
-                  </span>
-                  <span className="font-mono text-[11px] text-stone-400">Oficina Autorizada</span>
-                </div>
-
-                <h3 className="font-display text-lg font-bold text-stone-900">
-                  {service.title}
-                </h3>
-
-                <p className="text-xs text-stone-600 leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-stone-100 space-y-3">
-                <div className="text-[11px] font-mono text-stone-500">
-                  <span className="font-semibold text-stone-700">Aplicação:</span> {service.appliedTo}
-                </div>
-
-                <button
-                  onClick={() => onOpenQuoteWithService(service.title)}
-                  className="w-full py-2.5 px-3 min-h-[38px] text-xs font-bold text-stone-900 bg-stone-100 hover:bg-stone-200 rounded-md transition-colors text-center"
-                >
-                  Solicitar este serviço
-                </button>
-              </div>
-            </div>
+              {b.name}
+            </button>
           ))}
         </div>
-      </section>
 
-      {/* 12 AUTHORIZED BRANDS - PURE CLEAN LOGO GRID */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="border-b border-stone-200 pb-4 mb-8">
-          <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#E31B23]">
-            Credenciamento Direto
-          </span>
-          <h2 className="font-display text-2xl font-bold text-stone-900 mt-1">
-            12 Fabricantes com Assistência Autorizada
-          </h2>
-          <p className="text-xs text-stone-500 mt-1">
-            Trabalhamos exclusivamente com peças genuínas fornecidas pelas montadoras.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {/* Clean Brands Logo Grid - Pure Logos, No Descriptions, No Modals */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
           {filteredBrands.map((brand) => (
             <div
               key={brand.id}
-              className="bg-white border border-stone-200 rounded-lg p-5 flex items-center justify-center h-28 hover:border-stone-400 transition-colors"
-              title={brand.name}
+              className="bg-white border border-slate-200 hover:border-[#E31B23]/50 rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all flex flex-col items-center justify-between space-y-4 group"
             >
-              <BrandLogo brand={brand} size="md" />
+              {/* Authorized Badge */}
+              <div className="w-full flex items-center justify-between">
+                <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Oficial</span>
+                </span>
+                <span className="text-[10px] text-slate-400 uppercase font-mono">
+                  Autorizada
+                </span>
+              </div>
+
+              {/* Prominent Pure Logo Display */}
+              <div className="w-full py-4 px-2 bg-[#12151A] rounded-xl flex items-center justify-center min-h-[72px] shadow-inner group-hover:scale-102 transition-transform">
+                <BrandLogo brand={brand} size="md" />
+              </div>
+
+              {/* Direct Action Button to Quote Parts/Repairs */}
+              <button
+                onClick={() => onOpenQuoteWithService(brand.name)}
+                className="w-full py-2.5 px-3 min-h-[40px] text-xs font-bold text-slate-800 hover:text-white bg-slate-100 hover:bg-[#E31B23] rounded-xl transition-colors flex items-center justify-center gap-1.5 active:scale-95 text-center"
+              >
+                <span>Pedir Peças / Conserto</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
             </div>
           ))}
         </div>
       </section>
 
-      {/* WORKSHOP LOCATIONS & ADVICE */}
+      {/* CORE WORKSHOP SERVICES */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
+        <div className="space-y-1">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#E31B23]">
+            Procedimentos Mecânicos
+          </span>
+          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
+            Serviços Realizados nas Nossas Oficinas
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          {maintenanceServices.map((svc, idx) => (
+            <div
+              key={idx}
+              className="bg-slate-50 border border-slate-200/90 rounded-2xl p-5 sm:p-6 space-y-3"
+            >
+              <div className="text-2xl">{svc.icon}</div>
+              <h3 className="text-base font-bold text-slate-900">
+                {svc.title}
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                {svc.description}
+              </p>
+              <div className="pt-2 text-[11px] font-semibold text-slate-500 border-t border-slate-200">
+                <span>Aplicação: {svc.appliedTo}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* TIPS & PREVENTIVE GUIDELINES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="bg-[#0F1216] text-white rounded-lg p-8 sm:p-10 border border-stone-800 space-y-6">
-          <div className="max-w-2xl space-y-3">
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#E31B23]">
-              Atendimento Balcão
+        <div className="bg-[#181C21] text-white rounded-2xl p-6 sm:p-10 space-y-6">
+          <div className="max-w-2xl space-y-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#E31B23]">
+              Dicas dos Mecânicos da Mat-Tek
             </span>
-            <h3 className="font-display text-2xl font-bold">
-              Como entregar seu equipamento para manutenção
-            </h3>
-            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
-              Traga sua máquina em qualquer uma de nossas unidades em Pelotas ou Canguçu de segunda a sexta-feira (08:30 às 12:00 e 13:30 às 18:00). Nossos mecânicos realizam a conferência inicial no ato da entrega e emitem a ordem de serviço.
-            </p>
+            <h2 className="text-xl sm:text-2xl font-extrabold">
+              Como Prolongar a Vida Útil do seu Motor ou Motosserra
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-            {STORES.map((s) => (
-              <div key={s.id} className="p-4 bg-stone-900 border border-stone-800 rounded-md font-mono text-xs space-y-1">
-                <div className="font-bold text-white uppercase">{s.name}</div>
-                <div className="text-stone-400">{s.address}</div>
-                <div className="text-stone-300 font-semibold pt-1">Tel: {s.phone}</div>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 text-xs text-slate-300">
+            <div className="space-y-2 p-4 bg-white/5 rounded-xl border border-white/10">
+              <h4 className="font-bold text-white text-sm">1. Cuidado com Combustível Velho</h4>
+              <p className="leading-relaxed">
+                A gasolina comum tem alto teor de álcool e se degrada em 20 a 30 dias dentro do tanque, criando borra e entupindo o carburador. Se não for usar por mais de 15 dias, esgote o tanque e deixe o motor apagar.
+              </p>
+            </div>
+
+            <div className="space-y-2 p-4 bg-white/5 rounded-xl border border-white/10">
+              <h4 className="font-bold text-white text-sm">2. Proporção Exata de Óleo 2 Tempos</h4>
+              <p className="leading-relaxed">
+                Para equipamentos Husqvarna, Tekna e Vulcan, utilize sempre óleo 2T na proporção recomendada (ex: 50:1 para óleos Husqvarna). Óleo a menos funde o pistão; óleo a mais carboniza a vela.
+              </p>
+            </div>
+
+            <div className="space-y-2 p-4 bg-white/5 rounded-xl border border-white/10">
+              <h4 className="font-bold text-white text-sm">3. Limpeza Diária do Filtro de Ar</h4>
+              <p className="leading-relaxed">
+                Em motosserras e roçadeiras, a poeira e serragem aspiradas sem filtro provocam desgaste severo da camisa do cilindro. Lave ou sopre o filtro de ar a cada dia de serviço intenso.
+              </p>
+            </div>
+          </div>
+
+          <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-slate-400 text-center sm:text-left">
+              Seu equipamento precisa de uma revisão profissional? Traga para a Mat-Tek em Pelotas ou Canguçu.
+            </p>
+            <button
+              onClick={() => onOpenQuoteWithService()}
+              className="w-full sm:w-auto px-5 py-3 min-h-[44px] bg-[#E31B23] hover:bg-[#C0121A] text-white text-xs font-bold rounded-lg transition-colors text-center"
+            >
+              Agendar Revisão Técnica
+            </button>
           </div>
         </div>
       </section>
@@ -217,3 +278,4 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     </div>
   );
 };
+

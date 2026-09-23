@@ -18,83 +18,84 @@ export const StoresPage: React.FC<StoresPageProps> = () => {
   const storeStatus = isStoreOpenNow();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-12 pb-20 md:pb-16 text-[#15181C]">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-10 sm:space-y-12 pb-20 md:pb-12">
       
       {/* Page Header */}
-      <div className="border-b border-stone-200 pb-6 space-y-2">
-        <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#E31B23]">
-          Unidades & Oficinas Físicas
+      <div className="border-b border-slate-200 pb-6 space-y-2">
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#E31B23]">
+          <MapPin className="w-4 h-4" />
+          <span>Localização & Atendimento Regional</span>
         </div>
-        <h1 className="font-display text-2xl sm:text-4xl font-bold text-stone-900 tracking-tight">
-          Lojas em Pelotas e Canguçu
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Nossas Lojas em Pelotas e Canguçu
         </h1>
-        <p className="text-xs sm:text-sm text-stone-600 max-w-3xl leading-relaxed">
-          Atendimento presencial com bancada para diagnóstico de motores, demonstração prática de ferramentas e estoque de peças genuínas com garantia de fábrica.
+        <p className="text-sm text-slate-600 max-w-3xl">
+          Visite nossos showrooms de máquinas novas, traga seu motor para revisão autorizada ou entre em contato direto pelo WhatsApp.
         </p>
       </div>
 
-      {/* Side by Side Physical Store Cards - Industrial Architecture */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* Side by Side Stores Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
         {STORES.map((store) => {
           const isPelotas = store.id === 'pelotas';
           return (
             <div
               key={store.id}
-              className="bg-white border border-stone-200 hover:border-stone-400 rounded-lg p-6 sm:p-8 transition-all flex flex-col justify-between space-y-6"
+              className="bg-white border-2 border-slate-200 hover:border-[#E31B23]/50 rounded-2xl p-6 sm:p-8 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-6"
             >
-              <div className="space-y-5">
-                {/* Store Tag & Live Status - Zero Pills */}
-                <div className="flex items-center justify-between font-mono text-xs border-b border-stone-100 pb-3">
-                  <span className="font-bold uppercase tracking-wider text-[#E31B23]">
+              <div className="space-y-4">
+                {/* Store Tag & Live Status */}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black uppercase tracking-widest text-[#E31B23]">
                     {isPelotas ? 'Filial Pelotas' : 'Matriz Canguçu'}
                   </span>
-                  <span className="flex items-center gap-1.5 text-emerald-700 font-semibold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                  <span className="flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     <span>{storeStatus.message}</span>
                   </span>
                 </div>
 
                 {/* Title */}
                 <div>
-                  <h2 className="font-display text-2xl font-bold text-stone-900">
+                  <h2 className="text-2xl font-black text-slate-900">
                     {store.name}
                   </h2>
-                  <p className="text-xs text-stone-500 mt-1">
+                  <p className="text-xs text-slate-500 mt-1">
                     {store.notes}
                   </p>
                 </div>
 
                 {/* Info List */}
-                <dl className="space-y-3 text-xs sm:text-sm text-stone-700">
+                <div className="space-y-3 pt-2 text-xs sm:text-sm text-slate-700">
                   <div className="flex items-start gap-3">
-                    <dt className="font-mono font-semibold text-stone-500 w-24 shrink-0 flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-stone-400" />
-                      <span>Endereço</span>
-                    </dt>
-                    <dd>
-                      <span className="text-stone-900 font-medium">{store.address}</span>
-                      <p className="text-stone-500 text-xs">{store.city} - RS, CEP {store.cep}</p>
-                    </dd>
+                    <div className="w-8 h-8 rounded-lg bg-red-50 text-[#E31B23] flex items-center justify-center shrink-0 mt-0.5">
+                      <MapPin className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <strong className="block text-slate-900 font-bold">Endereço:</strong>
+                      <span>{store.address}</span>
+                      <p className="text-slate-500 text-xs">{store.city} - RS, CEP {store.cep}</p>
+                    </div>
                   </div>
 
-                  <div className="flex items-center gap-3">
-                    <dt className="font-mono font-semibold text-stone-500 w-24 shrink-0 flex items-center gap-1.5">
-                      <Phone className="w-3.5 h-3.5 text-stone-400" />
-                      <span>Telefone</span>
-                    </dt>
-                    <dd>
-                      <a href={`tel:${store.phoneRaw}`} className="text-stone-900 font-mono font-bold hover:text-[#E31B23]">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-red-50 text-[#E31B23] flex items-center justify-center shrink-0 mt-0.5">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <strong className="block text-slate-900 font-bold">Telefone da Loja:</strong>
+                      <a href={`tel:${store.phoneRaw}`} className="text-slate-900 font-mono font-semibold hover:text-[#E31B23]">
                         {store.phone}
                       </a>
-                    </dd>
+                    </div>
                   </div>
 
-                  <div className="flex items-center gap-3">
-                    <dt className="font-mono font-semibold text-stone-500 w-24 shrink-0 flex items-center gap-1.5">
-                      <MessageCircle className="w-3.5 h-3.5 text-emerald-500" />
-                      <span>WhatsApp</span>
-                    </dt>
-                    <dd>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                      <MessageCircle className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <strong className="block text-slate-900 font-bold">WhatsApp Direto:</strong>
                       <a 
                         href={`https://wa.me/${store.whatsappRaw}?text=${encodeURIComponent(`Olá ${store.name}! Gostaria de atendimento.`)}`}
                         target="_blank"
@@ -103,42 +104,44 @@ export const StoresPage: React.FC<StoresPageProps> = () => {
                       >
                         {store.whatsapp}
                       </a>
-                    </dd>
+                    </div>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <dt className="font-mono font-semibold text-stone-500 w-24 shrink-0 flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-stone-400" />
-                      <span>Horário</span>
-                    </dt>
-                    <dd className="font-mono text-xs text-stone-600">
-                      <span>Segunda a Sexta: 08:30–12:00, 13:30–18:00</span>
-                      <span className="block text-stone-400">Sábado e Domingo: Fechado</span>
-                    </dd>
+                    <div className="w-8 h-8 rounded-lg bg-red-50 text-[#E31B23] flex items-center justify-center shrink-0 mt-0.5">
+                      <Clock className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <strong className="block text-slate-900 font-bold">Horário de Funcionamento:</strong>
+                      <div className="text-xs text-slate-600 space-y-0.5 mt-1 font-mono">
+                        <p>Segunda a Sexta: 08:30–12:00, 13:30–18:00</p>
+                        <p className="text-red-700 font-semibold">Sábado e Domingo: Fechado</p>
+                      </div>
+                    </div>
                   </div>
-                </dl>
+                </div>
               </div>
 
               {/* Actions */}
-              <div className="pt-4 border-t border-stone-100 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
                 <a
                   href={store.googleMapsUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[42px] bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-md text-xs font-semibold transition-colors active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition-colors active:scale-95 text-center"
                 >
-                  <Navigation className="w-3.5 h-3.5 text-stone-500" />
-                  <span>Traçar Rota</span>
+                  <Navigation className="w-4 h-4 text-slate-600" />
+                  <span>Traçar Rota no Mapa</span>
                 </a>
 
                 <a
                   href={`https://wa.me/${store.whatsappRaw}?text=${encodeURIComponent(`Olá! Vim pelo site da Mat-Tek e gostaria de atendimento na unidade de ${store.city}.`)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[42px] bg-emerald-600 hover:bg-emerald-700 text-white rounded-md text-xs font-bold transition-colors shadow-xs active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors sm:ml-auto shadow-xs active:scale-95 text-center"
                 >
-                  <MessageCircle className="w-3.5 h-3.5" />
-                  <span>Conversar no WhatsApp</span>
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Chamar no WhatsApp</span>
                 </a>
               </div>
             </div>
@@ -146,30 +149,28 @@ export const StoresPage: React.FC<StoresPageProps> = () => {
         })}
       </div>
 
-      {/* Official Instagram Channels - Crisp Technical Cards (No AI purple gradient) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Instagram Pelotas */}
-        <div className="bg-[#0F1216] border border-stone-800 text-white p-6 sm:p-8 rounded-lg space-y-5 flex flex-col justify-between">
+      {/* Siga no Instagram - Balanced 2-Card Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        {/* Instagram Pelotas Card */}
+        <div className="bg-gradient-to-br from-pink-600 via-purple-700 to-indigo-800 text-white p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm flex flex-col justify-between">
           <div className="space-y-3">
-            <div className="flex items-center justify-between font-mono text-xs border-b border-stone-800 pb-3">
-              <span className="text-[#E31B23] font-bold uppercase tracking-wider">
-                Canal Oficial Pelotas
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center backdrop-blur-xs">
+                  <Instagram className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold">Instagram Pelotas</h3>
+                  <p className="text-xs text-pink-200">{COMPANY_INFO.instagramHandle}</p>
+                </div>
+              </div>
+              <span className="text-[10px] font-bold bg-white/20 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                Oficial
               </span>
-              <span className="text-stone-500">Instagram</span>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-md bg-white/10 flex items-center justify-center text-white">
-                <Instagram className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="font-display text-lg font-bold text-white">@mattekpelotas</h3>
-                <p className="text-xs text-stone-400">Filial Pelotas · R. Gen. Argolo, 1322</p>
-              </div>
-            </div>
-
-            <p className="text-xs text-stone-300 leading-relaxed">
-              Demonstrações práticas de motosserras, dicas de manutenção preventiva, entregas técnicas e novidades das marcas parceiras.
+            <p className="text-xs text-pink-100 leading-relaxed">
+              Vídeos de novos equipamentos, entregas técnicas, testes práticos de motosserras e dicas da oficina em Pelotas.
             </p>
           </div>
 
@@ -178,36 +179,34 @@ export const StoresPage: React.FC<StoresPageProps> = () => {
               href={COMPANY_INFO.instagram}
               target="_blank"
               rel="noreferrer"
-              className="w-full py-2.5 px-4 min-h-[42px] bg-white text-stone-900 hover:bg-stone-100 rounded-md font-bold text-xs transition-colors flex items-center justify-center gap-2 active:scale-95"
+              className="w-full text-center py-3 px-4 min-h-[44px] bg-white text-purple-900 rounded-xl font-bold text-xs hover:bg-pink-50 transition-colors shadow-xs flex items-center justify-center gap-2 active:scale-95"
             >
-              <span>Acessar Instagram Pelotas</span>
+              <span>Seguir @mattekpelotas</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
 
-        {/* Instagram Canguçu */}
-        <div className="bg-[#0F1216] border border-stone-800 text-white p-6 sm:p-8 rounded-lg space-y-5 flex flex-col justify-between">
+        {/* Instagram Canguçu Card */}
+        <div className="bg-gradient-to-br from-purple-700 via-pink-600 to-rose-700 text-white p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm flex flex-col justify-between">
           <div className="space-y-3">
-            <div className="flex items-center justify-between font-mono text-xs border-b border-stone-800 pb-3">
-              <span className="text-[#E31B23] font-bold uppercase tracking-wider">
-                Canal Oficial Canguçu
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center backdrop-blur-xs">
+                  <Instagram className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold">Instagram Canguçu</h3>
+                  <p className="text-xs text-pink-200">{COMPANY_INFO.instagramCangucuHandle}</p>
+                </div>
+              </div>
+              <span className="text-[10px] font-bold bg-white/20 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                Matriz
               </span>
-              <span className="text-stone-500">Instagram</span>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-md bg-white/10 flex items-center justify-center text-white">
-                <Instagram className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="font-display text-lg font-bold text-white">@mattekcangucu</h3>
-                <p className="text-xs text-stone-400">Matriz Canguçu · R. Gen. Câmara, 1556</p>
-              </div>
-            </div>
-
-            <p className="text-xs text-stone-300 leading-relaxed">
-              Rotina da oficina, revisão de motores estacionários, motobombas e soluções especializadas para o homem do campo e pequenos produtores.
+            <p className="text-xs text-pink-100 leading-relaxed">
+              Acompanhe a rotina da matriz em Canguçu, manutenção de motores, chegadas de peças e novidades para o campo.
             </p>
           </div>
 
@@ -216,9 +215,9 @@ export const StoresPage: React.FC<StoresPageProps> = () => {
               href="https://www.instagram.com/mattekcangucu/"
               target="_blank"
               rel="noreferrer"
-              className="w-full py-2.5 px-4 min-h-[42px] bg-white text-stone-900 hover:bg-stone-100 rounded-md font-bold text-xs transition-colors flex items-center justify-center gap-2 active:scale-95"
+              className="w-full text-center py-3 px-4 min-h-[44px] bg-white text-rose-900 rounded-xl font-bold text-xs hover:bg-pink-50 transition-colors shadow-xs flex items-center justify-center gap-2 active:scale-95"
             >
-              <span>Acessar Instagram Canguçu</span>
+              <span>Seguir @mattekcangucu</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
