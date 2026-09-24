@@ -1,0 +1,134 @@
+{
+  "site": {
+    "name": "Mat-Tek Máquinas, Motores e Assistência Técnica Autorizada",
+    "shortName": "Mat-Tek",
+    "domain": "https://mattek.com.br",
+    "defaultTitle": "Mat-Tek Máquinas, Motores e Assistência Técnica Autorizada | Pelotas e Canguçu",
+    "titleTemplate": "%s | Mat-Tek Máquinas e Motores",
+    "defaultDescription": "Venda e assistência técnica autorizada em máquinas, motores, motosserras, geradores e motobombas em Pelotas e Canguçu - RS. Peças originais e garantia oficial de fábrica para 12 grandes marcas mundiais.",
+    "keywords": [
+      "mat-tek máquinas e motores",
+      "assistência técnica autorizada pelotas",
+      "assistência técnica autorizada canguçu",
+      "conserto de motosserra pelotas",
+      "conserto de roçadeira canguçu",
+      "manutenção de geradores rs",
+      "peças originais husqvarna pelotas",
+      "assistência branco motores rs",
+      "autorizada toyama pelotas",
+      "lavadora jacto clean assistência",
+      "conserto de motobombas pelotas",
+      "afiação de correntes motosserra oregon",
+      "loja de máquinas agrícolas canguçu"
+    ],
+    "themeColor": "#E31B23",
+    "backgroundColor": "#FBFBFC",
+    "language": "pt-BR",
+    "locale": "pt_BR",
+    "author": "Mat-Tek Máquinas e Motores",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+  },
+  "openGraph": {
+    "type": "website",
+    "image": "/images/hero_machinery_workshop_1790171733001.jpg",
+    "imageAlt": "Oficina mecânica especializada e showroom de máquinas Mat-Tek",
+    "imageWidth": 1200,
+    "imageHeight": 630
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "site": "@mattekpelotas",
+    "creator": "@mattekpelotas"
+  },
+  "business": {
+    "legalName": "Mat-Tek Máquinas e Motores Ltda",
+    "foundingDate": "2017-04-17",
+    "priceRange": "$$",
+    "logo": "/images/logo.webp",
+    "logoWhite": "/images/logo-white.webp",
+    "email": "contato@mattek.com.br",
+    "branches": [
+      {
+        "id": "pelotas",
+        "name": "Mat-Tek - Filial Pelotas",
+        "streetAddress": "Rua General Argolo, 1322",
+        "neighborhood": "Centro",
+        "city": "Pelotas",
+        "state": "RS",
+        "postalCode": "96015-160",
+        "country": "BR",
+        "telephone": "+55-53-3228-5826",
+        "whatsapp": "+55-53-98448-9179",
+        "whatsappRaw": "5553984489179",
+        "geo": {
+          "latitude": -31.765442,
+          "longitude": -52.337618
+        },
+        "openingHours": [
+          "Mo-Fr 08:30-12:00",
+          "Mo-Fr 13:30-18:00"
+        ],
+        "googleMapsUrl": "https://maps.app.goo.gl/9P8kX39nJgZ9d47w5"
+      },
+      {
+        "id": "cangucu",
+        "name": "Mat-Tek - Matriz Canguçu",
+        "streetAddress": "Rua General Câmara, 1556",
+        "neighborhood": "Centro",
+        "city": "Canguçu",
+        "state": "RS",
+        "postalCode": "96600-000",
+        "country": "BR",
+        "telephone": "+55-53-99905-9179",
+        "whatsapp": "+55-53-98448-9179",
+        "whatsappRaw": "5553984489179",
+        "geo": {
+          "latitude": -31.395217,
+          "longitude": -52.678122
+        },
+        "openingHours": [
+          "Mo-Fr 08:30-12:00",
+          "Mo-Fr 13:30-18:00"
+        ],
+        "googleMapsUrl": "https://maps.app.goo.gl/K9g7yT6kK8pM1m5q6"
+      }
+    ],
+    "brandsAuthorized": [
+      "Götze",
+      "Husqvarna",
+      "Vulcan Trent",
+      "JactoClean",
+      "Oregon",
+      "Tekna",
+      "Branco",
+      "Toyama",
+      "Lynus",
+      "Kawashima",
+      "GMEG",
+      "Tramontina"
+    ],
+    "social": {
+      "instagramPelotas": "https://www.instagram.com/mattekpelotas/",
+      "instagramCangucu": "https://www.instagram.com/mattekcangucu/",
+      "whatsappCentral": "https://wa.me/5553984489179"
+    }
+  },
+  "faq": [
+    {
+      "question": "Como iniciou a história da Mat-Tek?",
+      "answer": "A Mat-Tek iniciou em 17 de abril de 2017 com a coragem de dois empreendedores de ter o próprio comércio de máquinas, motores e ferramentas em Canguçu - RS, expandindo posteriormente para Pelotas."
+    },
+    {
+      "question": "Quais marcas possuem assistência técnica autorizada na Mat-Tek?",
+      "answer": "Somos credenciados como Assistência Técnica Autorizada de 12 grandes marcas mundiais: Husqvarna, Branco Motores, Toyama, Tekna, Vulcan Trent, JactoClean, Götze, Oregon, Lynus, Kawashima, GMEG e Tramontina."
+    },
+    {
+      "question": "As peças utilizadas nas revisões e consertos são originais?",
+      "answer": "Sim, todas as peças e componentes utilizados em nossas oficinas de Pelotas e Canguçu são 100% genuínos fornecidos diretamente pelos fabricantes autorizados, mantendo a garantia e a segurança operacional."
+    },
+    {
+      "question": "Qual é o horário de atendimento das lojas?",
+      "answer": "Atendemos de segunda a sexta-feira, das 08:30 às 12:00 e das 13:30 às 18:00. Aos sábados e domingos as lojas permanecem fechadas."
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+---
+import seoConfig from '../data/seo.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+  type?: 'website' | 'article';
+}
+
+const {
+  title,
+  description,
+  image,
+  imageAlt,
+  canonicalUrl,
+  noindex = false,
+  type = seoConfig.openGraph.type as 'website' | 'article',
+} = Astro.props;
+
+// Compute final metadata
+const siteName = seoConfig.site.name;
+const finalTitle = title 
+  ? (title.includes(seoConfig.site.shortName) ? title : `${title} | ${seoConfig.site.shortName}`)
+  : seoConfig.site.defaultTitle;
+
+const finalDescription = description || seoConfig.site.defaultDescription;
+const finalImage = image || seoConfig.openGraph.image;
+const finalImageAlt = imageAlt || seoConfig.openGraph.imageAlt;
+
+// Compute Canonical URL based on current Astro URL or config
+const canonical = canonicalUrl || Astro.url.href;
+
+// Construct full image URL
+const fullImageUrl = finalImage.startsWith('http') 
+  ? finalImage 
+  : `${seoConfig.site.domain}${finalImage}`;
+
+// Structured Data (Schema.org JSON-LD)
+const schemaOrgGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    // 1. Organization
+    {
+      "@type": "Organization",
+      "@id": `${seoConfig.site.domain}/#organization`,
+      "name": seoConfig.business.legalName,
+      "alternateName": seoConfig.site.shortName,
+      "url": seoConfig.site.domain,
+      "logo": {
+        "@type": "ImageObject",
+        "@id": `${seoConfig.site.domain}/#logo`,
+        "url": `${seoConfig.site.domain}${seoConfig.business.logo}`,
+        "caption": seoConfig.site.name
+      },
+      "foundingDate": seoConfig.business.foundingDate,
+      "sameAs": [
+        seoConfig.business.social.instagramPelotas,
+        seoConfig.business.social.instagramCangucu
+      ],
+      "contactPoint": seoConfig.business.branches.map(b => ({
+        "@type": "ContactPoint",
+        "telephone": b.telephone,
+        "contactType": "customer service",
+        "areaServed": ["Pelotas", "Canguçu", "Região Sul RS"],
+        "availableLanguage": ["Portuguese"]
+      }))
+    },
+    // 2. WebSite
+    {
+      "@type": "WebSite",
+      "@id": `${seoConfig.site.domain}/#website`,
+      "url": seoConfig.site.domain,
+      "name": seoConfig.site.shortName,
+      "description": finalDescription,
+      "publisher": {
+        "@id": `${seoConfig.site.domain}/#organization`
+      },
+      "inLanguage": seoConfig.site.language
+    },
+    // 3. Local Business Units (Pelotas & Canguçu)
+    ...seoConfig.business.branches.map(branch => ({
+      "@type": ["LocalBusiness", "AutoRepair", "HomeAndConstructionBusiness"],
+      "@id": `${seoConfig.site.domain}/#${branch.id}`,
+      "name": branch.name,
+      "parentOrganization": {
+        "@id": `${seoConfig.site.domain}/#organization`
+      },
+      "telephone": branch.telephone,
+      "priceRange": seoConfig.business.priceRange,
+      "image": fullImageUrl,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": branch.streetAddress,
+        "addressLocality": branch.city,
+        "addressRegion": branch.state,
+        "postalCode": branch.postalCode,
+        "addressCountry": branch.country
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": branch.geo.latitude,
+        "longitude": branch.geo.longitude
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:30",
+          "closes": "12:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "13:30",
+          "closes": "18:00"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Assistência Técnica e Venda de Motores e Ferramentas",
+        "itemListElement": seoConfig.business.brandsAuthorized.map(brand => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": `Assistência Técnica Autorizada ${brand}`
+          }
+        }))
+      }
+    })),
+    // 4. FAQPage Schema for Google Rich Snippets
+    {
+      "@type": "FAQPage",
+      "@id": `${seoConfig.site.domain}/#faq`,
+      "mainEntity": seoConfig.faq.map(item => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.answer
+        }
+      }))
+    }
+  ]
+};
+---
+
+<!-- Primary Meta Tags injected from JSON at build time -->
+<title>{finalTitle}</title>
+<meta name="title" content={finalTitle} />
+<meta name="description" content={finalDescription} />
+<meta name="keywords" content={seoConfig.site.keywords.join(', ')} />
+<meta name="author" content={seoConfig.site.author} />
+<meta name="robots" content={noindex ? "noindex, nofollow" : seoConfig.site.robots} />
+<meta name="theme-color" content={seoConfig.site.themeColor} />
+<meta name="application-name" content={seoConfig.site.shortName} />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonical} />
+
+<!-- Favicon and App Icons -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Open Graph / Facebook / WhatsApp -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={finalTitle} />
+<meta property="og:description" content={finalDescription} />
+<meta property="og:site_name" content={seoConfig.site.shortName} />
+<meta property="og:locale" content={seoConfig.site.locale} />
+<meta property="og:image" content={fullImageUrl} />
+<meta property="og:image:width" content={seoConfig.openGraph.imageWidth.toString()} />
+<meta property="og:image:height" content={seoConfig.openGraph.imageHeight.toString()} />
+<meta property="og:image:alt" content={finalImageAlt} />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content={seoConfig.twitter.card} />
+<meta name="twitter:url" content={canonical} />
+<meta name="twitter:title" content={finalTitle} />
+<meta name="twitter:description" content={finalDescription} />
+<meta name="twitter:image" content={fullImageUrl} />
+<meta name="twitter:site" content={seoConfig.twitter.site} />
+<meta name="twitter:creator" content={seoConfig.twitter.creator} />
+
+<!-- Schema.org JSON-LD Structured Data Graph -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaOrgGraph, null, 2)} />

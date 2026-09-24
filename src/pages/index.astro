@@ -1,0 +1,703 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopNavbar from '../components/TopNavbar.astro';
+import Footer from '../components/Footer.astro';
+import BrandCarousel from '../components/BrandCarousel.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import MobileBottomNav from '../components/MobileBottomNav.astro';
+import Icon from '../components/Icon.astro';
+import { COMPANY_INFO, STORES, isStoreOpenNow } from '../data/stores';
+
+const storeStatus = isStoreOpenNow();
+
+const milestones = [
+  {
+    year: '17 de Abril de 2017',
+    title: 'O Início de um Grande Sonho em Canguçu',
+    description: 'Fundação oficial da Mat-Tek. Com coragem e determinação, os fundadores alugaram o primeiro prédio comercial, dando os primeiros passos no comércio e conserto de motores e máquinas.',
+  },
+  {
+    year: '2018 - 2019',
+    title: 'Conquista de Clientes e Credenciamento Inicial',
+    description: 'Mesmo enfrentando um mercado com empresas tradicionais já estabelecidas, a Mat-Tek conquistou clientes fiéis pela honestidade nos diagnósticos, agilidade e preços justos.',
+  },
+  {
+    year: '2020 - 2022',
+    title: 'Autorização Oficial das Maiores Marcas',
+    description: 'A empresa obteve o selo de Assistência Técnica Autorizada de gigantes mundiais como Husqvarna, Branco, Toyama, Tekna, JactoClean, Trapp e Buffalo.',
+  },
+  {
+    year: 'Expansão',
+    title: 'Inauguração da Loja e Oficina em Pelotas',
+    description: 'Para atender com excelência toda a região sul do RS, a Mat-Tek expandiu suas operações com uma unidade completa no Centro de Pelotas, na Rua Gen. Argolo.',
+  },
+  {
+    year: 'Hoje & Futuro',
+    title: 'Referência Sólida em Assistência Técnica',
+    description: 'Com milhares de equipamentos entregues e revisados, a Mat-Tek segue firme no compromisso com o produtor rural e o cliente urbano, investindo sempre em atendimento ágil e peças genuínas.',
+  },
+];
+---
+
+<Layout>
+  <div 
+    x-data="{ 
+      activeSection: 'inicio', 
+      showScrollTop: false,
+      faqOpen: 0,
+      init() {
+        window.addEventListener('scroll', () => {
+          this.showScrollTop = window.scrollY > 350;
+          const sections = ['inicio', 'parceiros', 'servicos', 'historia', 'unidades', 'contato'];
+          for (const s of sections) {
+            const el = document.getElementById(s);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 200 && rect.bottom >= 180) {
+                this.activeSection = s;
+                break;
+              }
+            }
+          }
+        }, { passive: true });
+      },
+      scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }" 
+    class="min-h-screen flex flex-col bg-[#FBFBFC] text-[#1E2229]"
+  >
+    
+    <!-- Top Sticky Navigation Bar -->
+    <TopNavbar />
+
+    <main class="flex-1">
+      
+      <!-- ============================================================ -->
+      <!-- SECTION 1: HERO / APRESENTAÇÃO (#inicio)                     -->
+      <!-- ============================================================ -->
+      <section 
+        id="inicio" 
+        class="relative min-h-[580px] lg:min-h-[660px] flex items-center bg-[#15191E] overflow-hidden text-white border-b border-neutral-800"
+      >
+        <!-- Background image overlay -->
+        <div class="absolute inset-0 z-0">
+          <img
+            src="/images/hero_machinery_workshop_1790171733001.jpg"
+            alt="Showroom e Oficina Técnica Mat-Tek"
+            class="w-full h-full object-cover object-center opacity-30 scale-105 transition-transform duration-1000 ease-out"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-[#111417] via-[#111417]/95 to-[#111417]/60"></div>
+          <div class="absolute inset-0 bg-radial from-transparent via-[#111417]/70 to-[#111417]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-24 w-full">
+          <div class="max-w-3xl space-y-6">
+            
+            <!-- Context Badges (shadcn badge style) -->
+            <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-300">
+              <span class="inline-flex items-center rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-bold text-[#E31B23] tracking-wide uppercase">
+                Desde 17 de Abril de 2017
+              </span>
+              <span aria-hidden="true" class="text-slate-600">·</span>
+              <span class="flex items-center gap-1 text-slate-200">
+                <Icon name="mapPin" class="w-3.5 h-3.5 text-[#E31B23]" />
+                Pelotas & Canguçu - RS
+              </span>
+              <span aria-hidden="true" class="text-slate-600">·</span>
+              <span class="text-emerald-400 font-medium flex items-center gap-1.5 bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-800/50">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                <span>{storeStatus.message}</span>
+              </span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12]">
+              Máquinas, Motores e Assistência Técnica Autorizada.
+            </h1>
+
+            <!-- Description -->
+            <p class="text-sm sm:text-base lg:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl">
+              Venda, manutenção especializada e peças genuínas para produtores rurais, profissionais e indústrias da região sul. Garantia oficial de fábrica para 12 grandes marcas mundiais.
+            </p>
+
+            <!-- Highlights Grid (shadcn card style) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              <div class="flex items-center gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs">
+                <Icon name="shieldCheck" class="w-5 h-5 text-[#E31B23] shrink-0" />
+                <span class="text-xs font-semibold text-slate-200">12 Marcas Autorizadas</span>
+              </div>
+              <div class="flex items-center gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs">
+                <Icon name="wrench" class="w-5 h-5 text-[#E31B23] shrink-0" />
+                <span class="text-xs font-semibold text-slate-200">Oficina Técnica Própria</span>
+              </div>
+              <div class="flex items-center gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs">
+                <Icon name="mapPin" class="w-5 h-5 text-[#E31B23] shrink-0" />
+                <span class="text-xs font-semibold text-slate-200">Lojas em Pelotas e Canguçu</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons (shadcn button style) -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
+              <a
+                href={`https://wa.me/${COMPANY_INFO.centralWhatsappRaw}?text=${encodeURIComponent('Olá! Vim pelo site da Mat-Tek e gostaria de atendimento.')}`}
+                target="_blank"
+                rel="noreferrer"
+                class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 min-h-[48px] rounded-xl font-bold text-sm bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/20 transition-all active:scale-98 whitespace-nowrap text-center"
+              >
+                <Icon name="messageCircle" class="w-5 h-5" />
+                <span>Falar no WhatsApp</span>
+              </a>
+
+              <a
+                href="#servicos"
+                class="inline-flex items-center justify-center gap-2 px-6 py-3.5 min-h-[48px] rounded-xl font-semibold text-sm bg-[#E31B23] hover:bg-red-700 text-white shadow-lg shadow-red-600/20 transition-all active:scale-98 whitespace-nowrap text-center"
+              >
+                <Icon name="wrench" class="w-4 h-4 text-white" />
+                <span>Serviços de Oficina</span>
+              </a>
+
+              <a
+                href="#unidades"
+                class="inline-flex items-center justify-center gap-2 px-5 py-3.5 min-h-[48px] rounded-xl font-semibold text-sm bg-white/10 hover:bg-white/15 text-white border border-white/20 transition-all active:scale-98 whitespace-nowrap backdrop-blur-xs text-center"
+              >
+                <Icon name="mapPin" class="w-4 h-4 text-slate-300" />
+                <span>Lojas & Horários</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 2: PARCEIROS / MARCAS AUTORIZADAS (#parceiros)       -->
+      <!-- ============================================================ -->
+      <section id="parceiros" class="scroll-mt-20">
+        <BrandCarousel
+          title="Marcas com Assistência Autorizada"
+          subtitle="Garantia oficial de fábrica e peças 100% originais para os principais fabricantes mundiais"
+        />
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SECTION: SERVIÇOS TÉCNICOS AUTORIZADOS (#servicos)          -->
+      <!-- ============================================================ -->
+      <ServicesSection />
+
+      <!-- ============================================================ -->
+      <!-- SECTION 3: NOSSA HISTÓRIA (#historia)                        -->
+      <!-- ============================================================ -->
+      <section id="historia" class="scroll-mt-20 py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 space-y-16">
+        
+        <!-- Header -->
+        <div class="max-w-3xl space-y-3">
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#E31B23]">
+            <Icon name="calendar" class="w-4 h-4" />
+            <span>Memória Institucional & Tradição</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+            MAT-TEK: Uma História de Sonho, Trabalho e Superação
+          </h2>
+          <p class="text-base sm:text-lg font-medium text-[#E31B23]">
+            De um sonho em 2017 a uma empresa sólida e referência regional no mercado de máquinas, motores e ferramentas.
+          </p>
+        </div>
+
+        <!-- Narrative & Values Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          
+          <!-- Story column -->
+          <div class="lg:col-span-7 space-y-5 text-slate-700 leading-relaxed text-sm sm:text-base">
+            <p class="first-letter:text-5xl first-letter:font-black first-letter:text-[#E31B23] first-letter:mr-2 first-letter:float-left">
+              Toda grande empresa tem um começo. A da <strong>Mat-Tek</strong> começou com um sonho simples, mas poderoso: ter o próprio negócio e fazer a diferença no mercado.
+            </p>
+
+            <p>
+              No dia <strong>17 de abril de 2017</strong>, nascia oficialmente a Mat-Tek em Canguçu, que hoje é sinônimo de confiança, qualidade e atendimento especializado em <strong>máquinas, motores e ferramentas</strong>.
+            </p>
+
+            <p>
+              Começamos com a coragem de alugar o primeiro espaço comercial e construir a empresa aos poucos, em cada passo. Os primeiros desafios não foram fáceis: era preciso conquistar uma carteira sólida de clientes em um segmento onde já existiam concorrentes estabelecidos há décadas.
+            </p>
+
+            <p>
+              Com honestidade no diagnóstico, preço justo e compromisso absoluto de consertar aquilo que o cliente realmente necessitava, a Mat-Tek ganhou o respeito de agricultores, construtores, jardineiros e indústrias de toda a região sul.
+            </p>
+
+            <!-- Blockquote from founders -->
+            <div class="p-6 bg-red-50/70 border-l-4 border-[#E31B23] rounded-r-2xl space-y-2">
+              <p class="italic text-slate-800 font-medium text-base">
+                “Construímos nossa história com trabalho, honestidade e dedicação. E seguimos firmes, sempre com o objetivo de crescer e fazer o melhor para nossos clientes e amigos.”
+              </p>
+              <p class="text-xs font-bold text-slate-900 not-italic uppercase tracking-wider">
+                — Equipe & Fundadores Mat-Tek
+              </p>
+            </div>
+
+            <!-- Founders Q&A Accordion (shadcn accordion style with Alpine.js) -->
+            <div class="pt-6">
+              <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <Icon name="bookOpen" class="w-5 h-5 text-[#E31B23]" />
+                <span>Perguntas Frequentes sobre Nossa Trajetória</span>
+              </h3>
+
+              <div class="border border-slate-200 rounded-2xl divide-y divide-slate-100 bg-white overflow-hidden shadow-xs">
+                <!-- Item 1 -->
+                <div>
+                  <button 
+                    type="button"
+                    @click="faqOpen = (faqOpen === 1 ? 0 : 1)"
+                    class="w-full px-6 py-4 flex items-center justify-between text-left font-bold text-slate-900 hover:text-[#E31B23] transition-colors"
+                  >
+                    <span>Como iniciou a Mat-Tek?</span>
+                    <span :class="{ 'rotate-180': faqOpen === 1 }" class="transition-transform duration-200 text-slate-400">
+                      <Icon name="chevronDown" class="w-4 h-4" />
+                    </span>
+                  </button>
+                  <div 
+                    x-show="faqOpen === 1" 
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 -translate-y-1"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    class="px-6 pb-4 text-sm text-slate-600 leading-relaxed"
+                  >
+                    Iniciou em 17 de abril de 2017 com um sonho de ter nosso próprio comércio de motores e ferramentas, começando em Canguçu e construindo aos poucos cada conquista.
+                  </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div>
+                  <button 
+                    type="button"
+                    @click="faqOpen = (faqOpen === 2 ? 0 : 2)"
+                    class="w-full px-6 py-4 flex items-center justify-between text-left font-bold text-slate-900 hover:text-[#E31B23] transition-colors"
+                  >
+                    <span>Quais são os principais desafios do dia a dia?</span>
+                    <span :class="{ 'rotate-180': faqOpen === 2 }" class="transition-transform duration-200 text-slate-400">
+                      <Icon name="chevronDown" class="w-4 h-4" />
+                    </span>
+                  </button>
+                  <div 
+                    x-show="faqOpen === 2" 
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 -translate-y-1"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    class="px-6 pb-4 text-sm text-slate-600 leading-relaxed"
+                  >
+                    Manter preços acessíveis com impostos e acompanhar a tecnologia dos motores e ferramentas, investindo constantemente no aperfeiçoamento da equipe técnica.
+                  </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div>
+                  <button 
+                    type="button"
+                    @click="faqOpen = (faqOpen === 3 ? 0 : 3)"
+                    class="w-full px-6 py-4 flex items-center justify-between text-left font-bold text-slate-900 hover:text-[#E31B23] transition-colors"
+                  >
+                    <span>Qual o conselho para quem sonha em empreender?</span>
+                    <span :class="{ 'rotate-180': faqOpen === 3 }" class="transition-transform duration-200 text-slate-400">
+                      <Icon name="chevronDown" class="w-4 h-4" />
+                    </span>
+                  </button>
+                  <div 
+                    x-show="faqOpen === 3" 
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 -translate-y-1"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    class="px-6 pb-4 text-sm text-slate-700 italic leading-relaxed"
+                  >
+                    “Pensar bem no negócio que quer abrir, se dedicar de verdade e correr atrás dos seus sonhos com honestidade.”
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual & Values Column -->
+          <div class="lg:col-span-5 space-y-6">
+            
+            <!-- Technical Service & Workshop Photo card -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+              <div class="aspect-4/3 rounded-xl overflow-hidden bg-slate-100">
+                <img
+                  src="/images/technical_assistance_service_1790171772657.jpg"
+                  alt="Assistência Técnica e Oficina Especializada Mat-Tek"
+                  class="w-full h-full object-cover hover:scale-102 transition-transform duration-500"
+                />
+              </div>
+              <div class="text-xs text-slate-600">
+                <p class="font-bold text-slate-900">Bancadas de Teste e Oficina Autorizada</p>
+                <p>Equipe treinada pelas fábricas com equipamentos de diagnóstico e peças genuínas em Pelotas e Canguçu.</p>
+              </div>
+            </div>
+
+            <!-- Pillars of Culture (shadcn card dark style) -->
+            <div class="bg-[#12151A] text-white p-6 sm:p-7 rounded-2xl space-y-5 border border-neutral-800 shadow-md">
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <Icon name="heart" class="w-4 h-4 text-[#E31B23]" />
+                <span>Nossos Pilares Inegociáveis</span>
+              </h3>
+
+              <div class="space-y-4 text-xs">
+                <div class="flex items-start gap-3">
+                  <Icon name="checkCircle2" class="w-4 h-4 text-[#E31B23] shrink-0 mt-0.5" />
+                  <div>
+                    <strong class="text-white block font-semibold text-sm">Diagnóstico Honesto:</strong>
+                    <span class="text-slate-300">Nunca substituímos peças desnecessárias. Diagnosticamos com transparência e respeito ao cliente.</span>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                  <Icon name="checkCircle2" class="w-4 h-4 text-[#E31B23] shrink-0 mt-0.5" />
+                  <div>
+                    <strong class="text-white block font-semibold text-sm">Peças 100% Genuínas:</strong>
+                    <span class="text-slate-300">Trabalhamos com componentes originais das fábricas credenciadas, assegurando durabilidade e garantia.</span>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                  <Icon name="checkCircle2" class="w-4 h-4 text-[#E31B23] shrink-0 mt-0.5" />
+                  <div>
+                    <strong class="text-white block font-semibold text-sm">Compromisso com o Cliente:</strong>
+                    <span class="text-slate-300">Seja você produtor rural, empresa ou autônomo, nossa prioridade é recolocar seu equipamento em funcionamento sem demora.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="space-y-8 pt-8 border-t border-slate-200">
+          <div class="text-center max-w-2xl mx-auto space-y-1">
+            <span class="text-xs font-bold uppercase tracking-widest text-[#E31B23]">
+              Linha do Tempo
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+              A Trajetória da Mat-Tek
+            </h3>
+          </div>
+
+          <div class="relative border-l-2 border-slate-200 ml-4 sm:ml-12 md:ml-32 space-y-8 py-4">
+            {milestones.map((m) => (
+              <div class="relative pl-6 sm:pl-8">
+                <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-[#E31B23] border-4 border-white shadow-xs"></div>
+                <div class="space-y-1">
+                  <span class="text-xs font-bold font-mono text-[#E31B23] uppercase tracking-wider">
+                    {m.year}
+                  </span>
+                  <h4 class="text-base sm:text-lg font-bold text-slate-900">
+                    {m.title}
+                  </h4>
+                  <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
+                    {m.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 4: LOJAS FÍSICAS & HORÁRIOS (#unidades)              -->
+      <!-- ============================================================ -->
+      <section id="unidades" class="scroll-mt-20 py-16 bg-slate-100 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-10">
+          
+          <!-- Header -->
+          <div class="text-center max-w-3xl mx-auto space-y-2">
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#E31B23]">
+              <Icon name="mapPin" class="w-4 h-4" />
+              <span>Nossas Unidades & Horários</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Lojas em Pelotas e Canguçu
+            </h2>
+            <p class="text-sm text-slate-600 max-w-2xl mx-auto">
+              Estrutura física própria com atendimento balcão, peças e oficina técnica autorizada.
+            </p>
+          </div>
+
+          <!-- Side-by-Side Stores Cards (shadcn card style) -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            {STORES.map((store) => {
+              const isPelotas = store.id === 'pelotas';
+              return (
+                <div class="bg-white border-2 border-slate-200 hover:border-[#E31B23]/50 rounded-2xl p-6 sm:p-8 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-6">
+                  <div class="space-y-4">
+                    <!-- Store Header & Live Status -->
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs font-black uppercase tracking-widest text-[#E31B23]">
+                        {isPelotas ? 'Filial Pelotas' : 'Matriz Canguçu'}
+                      </span>
+                      <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>{storeStatus.message}</span>
+                      </span>
+                    </div>
+
+                    <div>
+                      <h3 class="text-2xl font-black text-slate-900">
+                        {store.name}
+                      </h3>
+                      <p class="text-xs text-slate-500 mt-1">
+                        {store.notes}
+                      </p>
+                    </div>
+
+                    <!-- Info list -->
+                    <div class="space-y-3.5 pt-2 text-xs sm:text-sm text-slate-700">
+                      <!-- Address -->
+                      <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-[#E31B23] flex items-center justify-center shrink-0 mt-0.5">
+                          <Icon name="mapPin" class="w-4 h-4" />
+                        </div>
+                        <div>
+                          <strong class="block text-slate-900 font-bold">Endereço:</strong>
+                          <span>{store.address}</span>
+                          <p class="text-slate-500 text-xs">{store.city} - RS, CEP {store.cep}</p>
+                        </div>
+                      </div>
+
+                      <!-- Phone -->
+                      <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-[#E31B23] flex items-center justify-center shrink-0 mt-0.5">
+                          <Icon name="phone" class="w-4 h-4" />
+                        </div>
+                        <div>
+                          <strong class="block text-slate-900 font-bold">Telefone:</strong>
+                          <a href={`tel:${store.phoneRaw}`} class="text-slate-900 font-mono font-semibold hover:text-[#E31B23]">
+                            {store.phone}
+                          </a>
+                        </div>
+                      </div>
+
+                      <!-- WhatsApp -->
+                      <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                          <Icon name="messageCircle" class="w-4 h-4" />
+                        </div>
+                        <div>
+                          <strong class="block text-slate-900 font-bold">WhatsApp Direto:</strong>
+                          <a 
+                            href={`https://wa.me/${store.whatsappRaw}?text=${encodeURIComponent(`Olá ${store.name}! Gostaria de atendimento.`)}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            class="text-emerald-700 font-mono font-bold hover:underline"
+                          >
+                            {store.whatsapp}
+                          </a>
+                        </div>
+                      </div>
+
+                      <!-- Schedule -->
+                      <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-[#E31B23] flex items-center justify-center shrink-0 mt-0.5">
+                          <Icon name="clock" class="w-4 h-4" />
+                        </div>
+                        <div>
+                          <strong class="block text-slate-900 font-bold">Horário de Funcionamento:</strong>
+                          <div class="text-xs text-slate-600 space-y-0.5 mt-1 font-mono">
+                            <p class="font-semibold text-slate-800">Segunda a Sexta: 08:30–12:00, 13:30–18:00</p>
+                            <p class="text-red-700 font-bold">Sábado e Domingo: Fechado</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Actions (shadcn buttons) -->
+                  <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
+                    <a
+                      href={store.googleMapsUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      class="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition-colors active:scale-95 text-center"
+                    >
+                      <Icon name="navigation" class="w-4 h-4 text-slate-600" />
+                      <span>Traçar Rota no Mapa</span>
+                    </a>
+
+                    <a
+                      href={`https://wa.me/${store.whatsappRaw}?text=${encodeURIComponent(`Olá! Vim pelo site da Mat-Tek e gostaria de atendimento na unidade de ${store.city}.`)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      class="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors sm:ml-auto shadow-xs active:scale-95 text-center"
+                    >
+                      <Icon name="messageCircle" class="w-4 h-4" />
+                      <span>Chamar no WhatsApp</span>
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 5: CONTATO & REDES OFICIAIS (#contato)              -->
+      <!-- ============================================================ -->
+      <section id="contato" class="scroll-mt-20 py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
+        
+        <div class="text-center max-w-3xl mx-auto space-y-2">
+          <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#E31B23]">
+            <Icon name="messageCircle" class="w-4 h-4" />
+            <span>Canais de Atendimento</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Entre em Contato com a Mat-Tek
+          </h2>
+          <p class="text-sm text-slate-600 max-w-xl mx-auto">
+            Tire dúvidas sobre manutenção, revisão de motores, disponibilidade de peças ou orçamentos.
+          </p>
+        </div>
+
+        <!-- WhatsApp Direct Banner -->
+        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-3xl p-8 sm:p-12 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-8">
+          <div class="space-y-3 text-center md:text-left max-w-xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-white text-xs font-bold uppercase tracking-wider">
+              <Icon name="messageCircle" class="w-3.5 h-3.5" />
+              <span>Atendimento Ágil pelo WhatsApp</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-white leading-tight">
+              Converse diretamente com nossos técnicos
+            </h3>
+            <p class="text-sm text-emerald-100 leading-relaxed">
+              Envie fotos do equipamento, código de peças ou solicite informações de revisão para Pelotas e Canguçu.
+            </p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+            <a
+              href={`https://wa.me/${COMPANY_INFO.centralWhatsappRaw}?text=${encodeURIComponent('Olá Mat-Tek! Gostaria de tirar dúvidas com a equipe.')}`}
+              target="_blank"
+              rel="noreferrer"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-4 bg-white text-emerald-800 hover:bg-emerald-50 rounded-xl font-bold text-sm shadow-md transition-all active:scale-95 text-center"
+            >
+              <Icon name="messageCircle" class="w-5 h-5 text-emerald-600" />
+              <span>Falar no WhatsApp: (53) 98448-9179</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Social Instagram Profiles - 2 Cards Symmetrical -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          <!-- Instagram Pelotas Card -->
+          <div class="bg-gradient-to-br from-pink-600 via-purple-700 to-indigo-800 text-white p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center backdrop-blur-xs">
+                    <Icon name="instagram" class="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <span class="text-[11px] uppercase tracking-wider text-pink-200 font-bold block">Canal Oficial Pelotas</span>
+                    <strong class="text-lg font-bold">{COMPANY_INFO.instagramHandle}</strong>
+                  </div>
+                </div>
+                <span class="text-[11px] bg-white/20 px-2.5 py-0.5 rounded-full font-mono text-white/90">Pelotas</span>
+              </div>
+              <p class="text-xs text-white/80 leading-relaxed">
+                Acompanhe novidades, manutenções em bancada, novos equipamentos e dicas da unidade de Pelotas.
+              </p>
+            </div>
+
+            <a
+              href={COMPANY_INFO.instagram}
+              target="_blank"
+              rel="noreferrer"
+              class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-white text-purple-900 hover:bg-white/90 rounded-xl font-bold text-xs transition-all active:scale-95 shadow-sm text-center"
+            >
+              <span>Seguir @mattekpelotas</span>
+              <Icon name="externalLink" class="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          <!-- Instagram Canguçu Card -->
+          <div class="bg-gradient-to-br from-purple-700 via-pink-600 to-rose-700 text-white p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center backdrop-blur-xs">
+                    <Icon name="instagram" class="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <span class="text-[11px] uppercase tracking-wider text-purple-200 font-bold block">Canal Oficial Canguçu</span>
+                    <strong class="text-lg font-bold">{COMPANY_INFO.instagramCangucuHandle}</strong>
+                  </div>
+                </div>
+                <span class="text-[11px] bg-white/20 px-2.5 py-0.5 rounded-full font-mono text-white/90">Matriz</span>
+              </div>
+              <p class="text-xs text-white/80 leading-relaxed">
+                Fique por dentro das novidades, entregas técnicas, atendimento rural e fotos da matriz em Canguçu.
+              </p>
+            </div>
+
+            <a
+              href="https://www.instagram.com/mattekcangucu/"
+              target="_blank"
+              rel="noreferrer"
+              class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-white text-rose-900 hover:bg-white/90 rounded-xl font-bold text-xs transition-all active:scale-95 shadow-sm text-center"
+            >
+              <span>Seguir @mattekcangucu</span>
+              <Icon name="externalLink" class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Global Footer -->
+    <Footer />
+
+    <!-- Mobile Bottom Navigation -->
+    <MobileBottomNav />
+
+    <!-- Floating Action Button: Scroll to Top and WhatsApp (Alpine.js) -->
+    <aside aria-label="Ações rápidas de navegação e contato" class="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-40 flex flex-col items-end gap-2.5 pointer-events-none">
+      <!-- Scroll to Top -->
+      <button
+        type="button"
+        x-cloak
+        x-show="showScrollTop"
+        @click="scrollToTop()"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 translate-y-4 scale-90"
+        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+        x-transition:leave-end="opacity-0 translate-y-4 scale-90"
+        class="pointer-events-auto p-3 bg-slate-900/90 hover:bg-[#E31B23] text-white rounded-full shadow-lg border border-slate-700 transition-all active:scale-95 flex items-center justify-center backdrop-blur-xs group"
+        aria-label="Voltar ao topo da página"
+        title="Voltar ao topo"
+      >
+        <Icon name="arrowUp" class="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
+      </button>
+
+      <!-- Floating WhatsApp Button -->
+      <a
+        href={`https://wa.me/${COMPANY_INFO.centralWhatsappRaw}?text=${encodeURIComponent('Olá Mat-Tek! Gostaria de atendimento.')}`}
+        target="_blank"
+        rel="noreferrer"
+        class="pointer-events-auto p-3.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-lg hover:shadow-emerald-500/30 transition-all active:scale-95 flex items-center justify-center group"
+        aria-label="Abrir WhatsApp oficial"
+      >
+        <Icon name="messageCircle" class="w-5 h-5" />
+        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold pl-0 group-hover:pl-2">
+          Falar no WhatsApp
+        </span>
+      </a>
+    </aside>
+
+  </div>
+</Layout>

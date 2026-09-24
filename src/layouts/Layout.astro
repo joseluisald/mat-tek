@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+import SeoGenerator from '../components/SeoGenerator.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  image,
+  imageAlt,
+  canonicalUrl,
+  noindex = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Build-time SEO & Schema.org injection from src/data/seo.json -->
+    <SeoGenerator 
+      title={title}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      canonicalUrl={canonicalUrl}
+      noindex={noindex}
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="font-sans antialiased bg-[#FBFBFC] text-[#1E2229] selection:bg-[#E31B23] selection:text-white">
+    <slot />
+  </body>
+</html>

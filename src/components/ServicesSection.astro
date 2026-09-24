@@ -1,0 +1,159 @@
+---
+import Icon from './Icon.astro';
+import { COMPANY_INFO } from '../data/stores';
+
+const services = [
+  {
+    id: 'corte',
+    title: 'Afiação & Conjuntos de Corte',
+    subtitle: 'Correntes Oregon e Husqvarna, sabres e pinhões',
+    description: 'Afiação técnica com gabarito angular original de fábrica. Realinhamos sabres com desgaste irregular e substituímos pinhões estriados para corte macio e sem travamentos.',
+    image: '/images/product_chainsaw_pro_1790171742982.jpg',
+    features: [
+      'Gabarito de ângulo oficial de afiação',
+      'Desempenamento e retífica de canaleta de sabre',
+      'Correntes genuínas sob medida por elo'
+    ],
+    whatsappMsg: 'Olá Mat-Tek! Gostaria de afiação técnica ou revisão de conjunto de corte para motosserra.'
+  },
+  {
+    id: 'motores',
+    title: 'Retífica & Limpeza Ultrassônica 2T / 4T',
+    subtitle: 'Carburadores, tacômetro digital e compressão',
+    description: 'Bancada equipada com cubas de limpeza ultrassônica que desobstruem dutos microscópicos de combustível. Calibração fina de rotação com tacômetro eletrônico.',
+    image: '/images/technical_assistance_service_1790171772657.jpg',
+    features: [
+      'Limpeza ultrassônica de giclês e cuba',
+      'Aferição de compressão e estanqueidade de cárter',
+      'Kits de reparo e diafragmas originais de fábrica'
+    ],
+    whatsappMsg: 'Olá Mat-Tek! Gostaria de orçamento para revisão de motor e regulagem com tacômetro.'
+  },
+  {
+    id: 'lavadoras',
+    title: 'Bombas de Lavadoras & Alta Pressão',
+    subtitle: 'JactoClean, Tekna e Vulcan Trent autorizadas',
+    description: 'Oficina especializada em cabeçotes de latão e bombas de pistões cerâmicos. Solução definitiva para perda de pressão, vibração ou vazamentos de água e óleo.',
+    image: '/images/product_pressure_washer_1790171763016.jpg',
+    features: [
+      'Troca de gaxetas e retentores de alta durabilidade',
+      'Revisão de válvulas de alívio e by-pass',
+      'Inspeção de pistões de cerâmica com micrômetro'
+    ],
+    whatsappMsg: 'Olá Mat-Tek! Preciso de assistência técnica e peças para lavadora de alta pressão.'
+  },
+  {
+    id: 'geradores',
+    title: 'Geradores de Energia & Motobombas',
+    subtitle: 'Branco, Toyama e Kawashima sob teste de carga',
+    description: 'Revisão periódica de geradores a gasolina e diesel para não deixar sua propriedade ou empresa na mão. Teste sob carga contínua e aferição de frequência (60Hz) e AVR.',
+    image: '/images/product_generator_diesel_1790171752761.jpg',
+    features: [
+      'Calibração e teste de placas AVR e alternadores',
+      'Troca de filtros, velas industriais e fluidos',
+      'Manutenção preventiva antes de tempestades ou safras'
+    ],
+    whatsappMsg: 'Olá Mat-Tek! Gostaria de agendar revisão preventiva para meu gerador de energia.'
+  }
+];
+---
+
+<section id="servicos" class="scroll-mt-20 py-16 sm:py-24 bg-white border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
+    
+    <!-- Section Header -->
+    <div class="max-w-3xl space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-[#E31B23] text-xs font-bold uppercase tracking-wider">
+        <Icon name="wrench" class="w-3.5 h-3.5" />
+        <span>Especialidades de Oficina</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+        Serviços Técnicos com Padrão de Fábrica
+      </h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Mais do que trocar peças: realizamos testes metrológicos, calibração eletrônica e regulagem fina para que suas máquinas trabalhem com o máximo rendimento e menor consumo.
+      </p>
+    </div>
+
+    <!-- Services Grid: 4 Pillars -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+      {services.map((svc) => (
+        <div class="bg-[#FBFBFC] border border-slate-200/90 hover:border-[#E31B23]/40 rounded-3xl p-6 sm:p-8 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-6 group">
+          <div class="space-y-4">
+            <!-- Image Frame -->
+            <div class="aspect-16/9 rounded-2xl overflow-hidden bg-slate-900 relative shadow-inner">
+              <img
+                src={svc.image}
+                alt={svc.title}
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 left-4 text-xs font-mono font-bold text-white bg-black/60 px-3 py-1 rounded-full backdrop-blur-xs">
+                {svc.subtitle}
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 group-hover:text-[#E31B23] transition-colors">
+                {svc.title}
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                {svc.description}
+              </p>
+            </div>
+
+            <!-- Features checklist -->
+            <ul class="space-y-2 pt-2 border-t border-slate-200/80 text-xs text-slate-700">
+              {svc.features.map((feat) => (
+                <li class="flex items-center gap-2">
+                  <Icon name="checkCircle2" class="w-4 h-4 text-[#E31B23] shrink-0" />
+                  <span>{feat}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Direct CTA -->
+          <div class="pt-4 border-t border-slate-200/60 flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-500">Unidades: Pelotas & Canguçu</span>
+            <a
+              href={`https://wa.me/${COMPANY_INFO.centralWhatsappRaw}?text=${encodeURIComponent(svc.whatsappMsg)}`}
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2.5 bg-[#1E2229] hover:bg-[#E31B23] text-white text-xs font-bold rounded-xl transition-all shadow-xs active:scale-95 cursor-pointer"
+            >
+              <span>Consultar Oficina</span>
+              <Icon name="chevronRight" class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Assurance banner -->
+    <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-6 sm:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-700">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-red-500/20 text-[#E31B23] flex items-center justify-center shrink-0">
+          <Icon name="shieldCheck" class="w-7 h-7" />
+        </div>
+        <div>
+          <h4 class="text-base font-bold text-white">Garantia Formal de Serviço e Peças</h4>
+          <p class="text-xs text-slate-300 mt-0.5">Todas as manutenções contam com emissão de ordem de serviço e peças genuínas de fábrica.</p>
+        </div>
+      </div>
+
+      <a
+        href={`https://wa.me/${COMPANY_INFO.centralWhatsappRaw}?text=${encodeURIComponent('Olá Mat-Tek! Gostaria de agendar uma manutenção na oficina.')}`}
+        target="_blank"
+        rel="noreferrer"
+        class="inline-flex items-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all active:scale-95 shadow-md whitespace-nowrap"
+      >
+        <Icon name="messageCircle" class="w-4 h-4" />
+        <span>Agendar Manutenção via WhatsApp</span>
+      </a>
+    </div>
+
+  </div>
+</section>

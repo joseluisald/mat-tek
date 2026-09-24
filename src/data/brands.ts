@@ -1,4 +1,4 @@
-import { Brand } from '../types';
+import type { Brand } from '../types';
 
 
 export const AUTHORIZED_BRANDS: Brand[] = [
@@ -10,7 +10,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'Referência em durabilidade para o agronegócio e manutenção de grandes áreas com linha completa de tratores e componentes de corte.',
     popularItems: ['Tratores Cortadores', 'Lâminas Reforçadas', 'Correias e Polias'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/gotze.webp',
+    logoUrl: '/images/logos/gotze.webp',
     brandColor: '#2563EB',
   },
   {
@@ -21,7 +21,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'Líder mundial em equipamentos para manejo de florestas, parques e jardins. Assistência técnica com peças genuínas e diagnósticos de alto padrão.',
     popularItems: ['Motosserra 120 Mark II / 372XP', 'Roçadeira 143R-II', 'Soprador 125B', 'Óleos 2 Tempos'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/husqvarna.webp',
+    logoUrl: '/images/logos/husqvarna.webp',
     brandColor: '#1E40AF',
   },
   {
@@ -32,7 +32,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'Equipamentos robustos e de alto rendimento para construção civil, sítios e áreas rurais com excelente custo-benefício.',
     popularItems: ['Perfurador de Solo VPS520', 'Roçadeira VR520H', 'Motor Estacionário 7HP'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/vulcan-trent.webp',
+    logoUrl: '/images/logos/vulcan-trent.webp',
     brandColor: '#DC2626',
   },
   {
@@ -43,7 +43,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'Divisão de limpeza e biossegurança da lendária Jacto. Peças de alta durabilidade com bombas de cerâmica e cabeçotes em latão.',
     popularItems: ['Lavadora J7000 Plus', 'Lavadora J6800', 'Pulverizadores Profissionais'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/jacto-clean.webp',
+    logoUrl: '/images/logos/jacto-clean.webp',
     brandColor: '#EA580C',
   },
   {
@@ -54,7 +54,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'Pioneira mundial em tecnologia de correntes de motosserra. Precisão milimétrica, máxima retenção de fio e segurança no corte.',
     popularItems: ['Corrente 3/8" e .325"', 'Sabre PowerCut', 'Kits de Afiação Manual'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/oregon.webp',
+    logoUrl: '/images/logos/oregon.webp',
     brandColor: '#B91C1C',
   },
   {
@@ -65,7 +65,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'Amplo portfólio de máquinas a combustão e elétricas para uso residencial, fazendas e oficinas.',
     popularItems: ['Motosserra CS42S', 'Gerador GT3500', 'Motobomba Autoescorvante'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/tekna.webp',
+    logoUrl: '/images/logos/tekna.webp',
     brandColor: '#F97316',
   },
   {
@@ -76,7 +76,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'Mais de 80 anos de tradição brasileira em força motriz para o campo e construção civil, com motores de altíssima confiabilidade.',
     popularItems: ['Gerador B4T-2500', 'Motor Estacionário B4T 6.5HP', 'Motobomba BD-705'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/branco.webp',
+    logoUrl: '/images/logos/branco.webp',
     brandColor: '#0369A1',
   },
   {
@@ -87,7 +87,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'Tecnologia de ponta em geração de energia, agricultura familiar e manutenção florestal. Assistência com peças de reposição rápida.',
     popularItems: ['Gerador TG3100CX', 'Motocultivador TT90', 'Motor Diesel TDW10'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/toyama.webp',
+    logoUrl: '/images/logos/toyama.webp',
     brandColor: '#B91C1C',
   },
   {
@@ -98,7 +98,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'Soluções avançadas para metalúrgicas, serralherias e oficinas mecânicas com tecnologia IGBT e compressores silenciosos.',
     popularItems: ['Inversora de Solda LIS-160', 'Compressor de Ar Pro', 'Máscara Automática'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/lynus.webp',
+    logoUrl: '/images/logos/lynus.webp',
     brandColor: '#0284C7',
   },
   {
@@ -109,7 +109,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'Engenharia com alto padrão de precisão em motores a combustão e equipamentos para lavouras, pomares e hortifrutigranjeiros.',
     popularItems: ['Pulverizador Costal KF-25', 'Motor Estacionário GE 700', 'Atomizador KWS'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/kawashima.webp',
+    logoUrl: '/images/logos/kawashima.webp',
     brandColor: '#059669',
   },
   {
@@ -120,7 +120,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'Equipamentos pesados para suporte automotivo e agrícola, garantindo segurança operacional e alta capacidade de carga.',
     popularItems: ['Prensa Hidráulica 15T', 'Guincho Hidráulico Girafa', 'Macacos Garrafa'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/gmeg.webp',
+    logoUrl: '/images/logos/gmeg.webp',
     brandColor: '#475569',
   },
   {
@@ -131,7 +131,7 @@ export const AUTHORIZED_BRANDS: Brand[] = [
     description: 'A marca mais confiável do Brasil em ferramentas manuais forjadas, serras, alicates industriais e linha para manutenção verde.',
     popularItems: ['Jogos de Ferramentas Mecânicas', 'Cortador de Grama Elétrico', 'Tesouras de Poda'],
     authorizedService: true,
-    logoUrl: '/src/assets/images/logos/tramontina.webp',
+    logoUrl: '/images/logos/tramontina.webp',
     brandColor: '#1E3A8A',
   },
 ];
